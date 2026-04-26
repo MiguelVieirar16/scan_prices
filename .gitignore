@@ -1,0 +1,22 @@
+# Node
+node_modules
+npm-debug.log*
+
+# Env
+.env
+.env.*
+!.env.example
+
+# Build
+dist
+coverage
+.vite
+
+# IDE
+.DS_Store
+.vscode
+
+# Runtime
+tmp
+logs
+*.log

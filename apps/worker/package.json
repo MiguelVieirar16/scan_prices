@@ -1,0 +1,25 @@
+{
+  "name": "@scan/worker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js",
+    "lint": "echo 'Sin lint configurado en @scan/worker'",
+    "test": "echo 'Sin tests configurados en @scan/worker'"
+  },
+  "dependencies": {
+    "@scan/config": "0.1.0",
+    "@scan/logger": "0.1.0",
+    "@scan/shared-types": "0.1.0",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.12",
+    "tsx": "^4.16.2",
+    "typescript": "^5.5.4"
+  }
+}

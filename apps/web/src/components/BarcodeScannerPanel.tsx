@@ -1,0 +1,48 @@
+import { useState } from "react";
+import { useBarcodeScanner } from "../features/scanner/useBarcodeScanner";
+
+interface BarcodeScannerPanelProps {
+  onSubmitCode: (barcode: string) => Promise<void>;
+  loading: boolean;
+}
+
+export function BarcodeScannerPanel({ onSubmitCode, loading }: BarcodeScannerPanelProps) {
+  const [manualCode, setManualCode] = useState("");
+
+  const scanner = useBarcodeScanner((value: string) => {
+    setManualCode(value);
+    void onSubmitCode(value);
+  });
+
+  return (
+    <section className="scanner-card">
+      <h2>Escaneo</h2>
+      <p>Escanea con camara o ingresa manualmente el codigo de barras.</p>
+
+      <div className="scanner-controls">
+        <button onClick={() => void scanner.start()} disabled={loading}>Iniciar camara</button>
+        <button onClick={() => scanner.stop()} disabled={loading}>Detener</button>
+      </div>
+
+      <video ref={scanner.videoRef} className="scanner-video" muted playsInline />
+
+      <div className="manual-entry">
+        <input
+          type="text"
+          inputMode="numeric"
+          placeholder="Ej: 7591234567890"
+          value={manualCode}
+          onChange={(event) => setManualCode(event.target.value)}
+        />
+        <button onClick={() => void onSubmitCode(manualCode)} disabled={loading || !manualCode}>
+          Consultar
+        </button>
+      </div>
+
+      <small>
+        Estado: {scanner.state.status}
+        {scanner.state.error ? ` | ${scanner.state.error}` : ""}
+      </small>
+    </section>
+  );
+}

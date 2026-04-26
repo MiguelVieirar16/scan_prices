@@ -1,0 +1,27 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: scan_prices_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: scan_prices
+      POSTGRES_USER: scan_user
+      POSTGRES_PASSWORD: scan_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./infra/db/init.sql:/docker-entrypoint-initdb.d/001-init.sql:ro
+
+  redis:
+    image: redis:7
+    container_name: scan_prices_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  postgres_data:
+  redis_data:
