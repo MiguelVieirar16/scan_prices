@@ -12,6 +12,8 @@
     "dev:api": "npm --workspace @scan/api run dev",
     "dev:web": "npm --workspace @scan/web run dev",
     "dev:worker": "npm --workspace @scan/worker run dev",
+    "dev:test": "NODE_ENV=test npm run dev",
+    "dev:prod": "NODE_ENV=production npm run dev",
     "qr:generate": "node scripts/generate-storefront-qr.mjs",
     "build:packages": "npm run build --if-present --workspace @scan/shared-types --workspace @scan/config --workspace @scan/logger",
     "build:apps": "npm run build --if-present --workspace @scan/api --workspace @scan/web --workspace @scan/worker",

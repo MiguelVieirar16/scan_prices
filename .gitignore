@@ -2,9 +2,12 @@
 node_modules
 npm-debug.log*
 
-# Env
+# Env - NEVER commit these with real values
 .env
-.env.*
+.env.local
+.env.test
+.env.production
+.env.*.local
 !.env.example
 
 # Build

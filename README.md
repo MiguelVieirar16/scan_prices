@@ -11,11 +11,11 @@ Plataforma multi-comercio para escaneo de códigos de barras y consulta de preci
 - `infra/*`: base de datos, docker y observabilidad.
 - `docs/*`: arquitectura, integraciones y operación.
 
-## Inicio rápido
+## Inicio rápido (desarrollo local)
 
-1. Copiar variables de entorno:
+1. Copiar variables de entorno para desarrollo local:
 ```bash
-cp .env.example .env
+cp .env.example .env.local
 ```
 2. Levantar infraestructura:
 ```bash
@@ -29,14 +29,26 @@ psql postgres://scan_user:scan_password@localhost:5432/scan_prices -f infra/migr
 psql postgres://scan_user:scan_password@localhost:5432/scan_prices -f infra/migrations/004_seed_storefront_demo.sql
 psql postgres://scan_user:scan_password@localhost:5432/scan_prices -f infra/migrations/005_exchange_rates_audit_columns.sql
 ```
-4. Ejecutar API, Web y Worker (en terminales separadas):
+4. Ejecutar aplicaciones:
+```bash
+npm run dev
+```
+O ejecutar individualmente:
 ```bash
 npm run dev:api
 npm run dev:web
 npm run dev:worker
 ```
 
-> Nota: este repositorio incluye estructura y base de código para arrancar. Debes instalar dependencias por workspace con `npm install` en la raíz.
+## Variables de entorno
+
+| Archivo | Uso | Comando |
+|---------|-----|----------|
+| `.env.local` | Desarrollo local (docker) | `npm run dev` |
+| `.env.test` | Testing (producción) | `NODE_ENV=test npm run dev` |
+| Vercel/Render | Producción | Configurado en dashboard |
+
+> Nota: Este repositorio incluye estructura y base de código para arrancar. Debes instalar dependencias por workspace con `npm install` en la raíz.
 
 ## Endpoint de prueba
 
