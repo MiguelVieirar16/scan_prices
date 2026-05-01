@@ -15,21 +15,15 @@ export function BarcodeScannerPanel({ onSubmitCode, loading }: BarcodeScannerPan
   });
 
   return (
-    <section className="scanner-card">
+    <section className="scanner-card" id="scanner-container">
       <h2>Escaneo</h2>
       <p>Escanea con camara o ingresa manualmente el codigo de barras.</p>
 
-      {scanner.isSupported && (
-        <div className="scanner-controls">
-          <button onClick={() => void scanner.start()} disabled={loading}>
-            {scanner.state.status === "streaming" ? "Escanear otro" : "Escanear producto"}
-          </button>
-        </div>
-      )}
-
-      {scanner.state.status === "streaming" && (
-        <video ref={scanner.videoRef} className="scanner-video" muted playsInline />
-      )}
+      <div className="scanner-controls">
+        <button onClick={() => void scanner.start()} disabled={loading}>
+          {scanner.state.status === "streaming" ? "Escanear otro" : "Escanear producto"}
+        </button>
+      </div>
 
       <div className="manual-entry">
         <input
