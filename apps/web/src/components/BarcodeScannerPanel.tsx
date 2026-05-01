@@ -20,8 +20,9 @@ export function BarcodeScannerPanel({ onSubmitCode, loading }: BarcodeScannerPan
       <p>Escanea con camara o ingresa manualmente el codigo de barras.</p>
 
       <div className="scanner-controls">
-        <button onClick={() => void scanner.start()} disabled={loading}>Iniciar camara</button>
-        <button onClick={() => scanner.stop()} disabled={loading}>Detener</button>
+        <button onClick={() => void scanner.start()} disabled={loading}>
+          {scanner.state.status === "streaming" ? "Escanear otro" : "Escanear producto"}
+        </button>
       </div>
 
       <video ref={scanner.videoRef} className="scanner-video" muted playsInline />
@@ -41,6 +42,7 @@ export function BarcodeScannerPanel({ onSubmitCode, loading }: BarcodeScannerPan
 
       <small>
         Estado: {scanner.state.status}
+        {scanner.state.status === "unsupported" && " (usa entrada manual)"}
         {scanner.state.error ? ` | ${scanner.state.error}` : ""}
       </small>
     </section>

@@ -63,6 +63,7 @@ export function useBarcodeScanner(onDetected: (value: string) => void) {
 
         setState((prev) => ({ ...prev, lastCode: rawValue }));
         onDetected(rawValue);
+        stop();
       }, 800);
 
       setState((prev) => ({ ...prev, status: "streaming" }));

@@ -152,28 +152,30 @@ export default function App() {
         </section>
       )}
 
-      <section className="tenant-card">
-        <h2>Contexto de comercio</h2>
+      {!hasResolvedStorefront && (
+        <section className="tenant-card">
+          <h2>Contexto de comercio</h2>
 
-        {isContextLocked ? (
-          <div className="locked-context">
-            <p>Esta tienda fue definida por QR.</p>
-            <p><strong>Tenant:</strong> {tenantCode}</p>
-            <p><strong>Sucursal:</strong> {storeCode}</p>
-          </div>
-        ) : (
-          <div className="tenant-grid">
-            <label>
-              Tenant
-              <input value={tenantCode} onChange={(event) => setTenantCode(event.target.value)} />
-            </label>
-            <label>
-              Sucursal
-              <input value={storeCode} onChange={(event) => setStoreCode(event.target.value)} />
-            </label>
-          </div>
-        )}
-      </section>
+          {isContextLocked ? (
+            <div className="locked-context">
+              <p>Esta tienda fue definida por QR.</p>
+              <p><strong>Tenant:</strong> {tenantCode}</p>
+              <p><strong>Sucursal:</strong> {storeCode}</p>
+            </div>
+          ) : (
+            <div className="tenant-grid">
+              <label>
+                Tenant
+                <input value={tenantCode} onChange={(event) => setTenantCode(event.target.value)} />
+              </label>
+              <label>
+                Sucursal
+                <input value={storeCode} onChange={(event) => setStoreCode(event.target.value)} />
+              </label>
+            </div>
+          )}
+        </section>
+      )}
 
       <BarcodeScannerPanel onSubmitCode={handleSubmitCode} loading={loading || loadingStorefront} />
 
