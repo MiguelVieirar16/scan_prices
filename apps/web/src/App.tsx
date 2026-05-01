@@ -32,7 +32,9 @@ function readUrlContext(): UrlContext {
 }
 
 export default function App() {
+  console.log("[APP] Starting App...");
   const initialUrlContext = useMemo(readUrlContext, []);
+  console.log("[APP] Initial URL context:", initialUrlContext);
 
   const [tenantCode, setTenantCode] = useState(
     initialUrlContext.storefrontCode ? "" : (initialUrlContext.tenantCode ?? DEFAULT_TENANT)
