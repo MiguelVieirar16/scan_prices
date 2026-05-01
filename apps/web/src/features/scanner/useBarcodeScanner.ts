@@ -14,6 +14,8 @@ export function useBarcodeScanner(onDetected: (value: string) => void) {
   const detectorRef = useRef<BarcodeDetector | null>(null);
   const intervalRef = useRef<number | null>(null);
 
+  const isSupported = typeof window !== "undefined" && "BarcodeDetector" in window;
+
   const [state, setState] = useState<ScannerState>({
     status: "idle",
     error: null,
@@ -28,8 +30,8 @@ export function useBarcodeScanner(onDetected: (value: string) => void) {
   }, []);
 
   async function start(): Promise<void> {
-    if (!("BarcodeDetector" in globalThis)) {
-      setState((prev) => ({ ...prev, status: "unsupported" }));
+    if (!isSupported) {
+      setState((prev) => ({ ...prev, status: "unsupported", error: "Navegador no compatible con escaneo" }));
       return;
     }
 
@@ -98,6 +100,7 @@ export function useBarcodeScanner(onDetected: (value: string) => void) {
     videoRef,
     state,
     start,
-    stop
+    stop,
+    isSupported
   };
 }

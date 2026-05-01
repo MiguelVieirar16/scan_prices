@@ -19,13 +19,17 @@ export function BarcodeScannerPanel({ onSubmitCode, loading }: BarcodeScannerPan
       <h2>Escaneo</h2>
       <p>Escanea con camara o ingresa manualmente el codigo de barras.</p>
 
-      <div className="scanner-controls">
-        <button onClick={() => void scanner.start()} disabled={loading}>
-          {scanner.state.status === "streaming" ? "Escanear otro" : "Escanear producto"}
-        </button>
-      </div>
+      {scanner.isSupported && (
+        <div className="scanner-controls">
+          <button onClick={() => void scanner.start()} disabled={loading}>
+            {scanner.state.status === "streaming" ? "Escanear otro" : "Escanear producto"}
+          </button>
+        </div>
+      )}
 
-      <video ref={scanner.videoRef} className="scanner-video" muted playsInline />
+      {scanner.state.status === "streaming" && (
+        <video ref={scanner.videoRef} className="scanner-video" muted playsInline />
+      )}
 
       <div className="manual-entry">
         <input
@@ -40,11 +44,14 @@ export function BarcodeScannerPanel({ onSubmitCode, loading }: BarcodeScannerPan
         </button>
       </div>
 
-      <small>
-        Estado: {scanner.state.status}
-        {scanner.state.status === "unsupported" && " (usa entrada manual)"}
-        {scanner.state.error ? ` | ${scanner.state.error}` : ""}
-      </small>
+      {scanner.state.status !== "idle" && (
+        <small>
+          {scanner.state.status === "unsupported" && "Escaneo no disponible en este navegador"}
+          {scanner.state.status === "requesting_permission" && "Solicitando permiso de camara..."}
+          {scanner.state.status === "streaming" && "Escaneando..."}
+          {scanner.state.status === "error" && `Error: ${scanner.state.error}`}
+        </small>
+      )}
     </section>
   );
 }
