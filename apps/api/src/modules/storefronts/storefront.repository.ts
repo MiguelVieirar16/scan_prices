@@ -31,7 +31,11 @@ async function findStorefrontByCodeInDb(storefrontCode: string): Promise<Storefr
   const { getDbPool } = await import("../../core/db.js");
   const pool = getDbPool();
 
+  console.log("[DEBUG] findStorefrontByCodeInDb called with:", storefrontCode);
+  console.log("[DEBUG] pool exists:", !!pool);
+
   if (!pool) {
+    console.log("[DEBUG] No pool - returning null");
     return null;
   }
 
@@ -61,6 +65,7 @@ async function findStorefrontByCodeInDb(storefrontCode: string): Promise<Storefr
   `;
 
   try {
+    console.log("[DEBUG] About to execute query for:", storefrontCode);
     const result = await pool.query<{
       storefront_code: string;
       tenant_code: string;
@@ -76,8 +81,10 @@ async function findStorefrontByCodeInDb(storefrontCode: string): Promise<Storefr
       is_active: boolean;
     }>(query, [storefrontCode]);
 
+    console.log("[DEBUG] Query returned rows:", result.rows.length);
     const row = result.rows[0];
     if (!row) {
+      console.log("[DEBUG] No row found for:", storefrontCode);
       return null;
     }
 
@@ -95,7 +102,8 @@ async function findStorefrontByCodeInDb(storefrontCode: string): Promise<Storefr
       fontFamily: row.font_family,
       isActive: row.is_active
     };
-  } catch {
+  } catch (err) {
+    console.error("[DEBUG] Database query error:", err);
     return null;
   }
 }
