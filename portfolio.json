@@ -4,8 +4,8 @@
     "en": "Scan Prices"
   },
   "description": {
-    "es": "Plataforma de consulta de precios en Venezuela por código de barras con conversión a tasa BCV en tiempo real. Monorepo con API NestJS, frontend Next.js y worker de scraping.",
-    "en": "Venezuela price lookup platform by barcode with real-time BCV exchange rate conversion. Monorepo with NestJS API, Next.js frontend, and scraping worker."
+    "es": "Consulta precios en Venezuela por código de barras con conversión a tasa BCV en tiempo real.",
+    "en": "Look up prices in Venezuela by barcode with real-time BCV exchange rate conversion."
   },
   "image": "https://placehold.co/800x400/0f172a/38bdf8?text=Scan+Prices",
   "tags": ["Next.js", "NestJS", "PostgreSQL"],
