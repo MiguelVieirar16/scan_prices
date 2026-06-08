@@ -10,7 +10,8 @@
   "image": "https://placehold.co/800x400/0f172a/38bdf8?text=Scan+Prices",
   "tags": ["Next.js", "NestJS", "PostgreSQL"],
   "links": {
-    "github": "https://github.com/MiguelVieirar16/scan_prices"
+    "github": "https://github.com/MiguelVieirar16/scan_prices",
+    "preview": "https://scan-prices-web.vercel.app/"
   },
   "featured": true,
   "order": 2
