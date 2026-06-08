@@ -1,0 +1,12 @@
+name: Sync to portfolio
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Netlify build
+        run: curl -s -X POST "${{ secrets.NETLIFY_BUILD_HOOK }}"
