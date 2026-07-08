@@ -7,7 +7,7 @@
     "es": "Consulta precios en Venezuela por código de barras con conversión a tasa BCV en tiempo real.",
     "en": "Look up prices in Venezuela by barcode with real-time BCV exchange rate conversion."
   },
-  "image": "https://placehold.co/800x400/0f172a/38bdf8?text=Scan+Prices",
+  "image": "/projects/scan_prices.webp",
   "tags": ["Next.js", "NestJS", "PostgreSQL"],
   "links": {
     "github": "https://github.com/MiguelVieirar16/scan_prices",
